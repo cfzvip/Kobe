@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     * {
+         padding: 0;
+         margin: 0;
+     }
+      #demo {
+          background-color: #eeeeee;
+             overflow: hidden;   
+           width: 550px; 
+          margin: 0 auto;
+          height: 360px;
+      }
+      #demo img {
+          
+          width: 550px;
+          height: 360px;
+           margin-right: 10px; 
+      }
+      #indemo {
+          float: left;
+          width: 800%;
+      }
+       #demo1,#demo2 {
+          float: left;
+      } 
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <div id="indemo">
+            <div id="demo1">
+             <a href=""><img src="z1.jpg" alt=""></a>
+             <a href=""><img src="z2.jpg" alt=""></a>
+             <a href=""><img src="z3.jpg" alt=""></a>
+             <a href=""><img src="z4.jpg" alt=""></a>
+            </div>
+          <div id="demo2"></div>
+        </div>
+    </div>
+</body>
+<script>
+    var speed = 10;
+    var tab = document.getElementById('demo')
+    var tab1 = document.getElementById('demo1')
+    var tab2 = document.getElementById('demo2')
+     tab2.innerHTML = tab1.innerHTML
+     function marquee() {
+         if(tab.scrollLeft <= 0) {
+             tab.scrollLeft = tab2.offsetWidth
+         } else {
+             tab.scrollLeft--;
+         }
+     }
+      var autoplay = setInterval(marquee,speed)
+      tab.onmousemove = function() {
+          clearInterval(autoplay)
+      }
+      tab.onmouseout = function () {
+          autoplay = setInterval(marquee, speed)   
+      }
+</script>
+</html>

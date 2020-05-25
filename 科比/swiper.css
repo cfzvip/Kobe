@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+img{/*img在IE低版本会出现蓝色边框*/
+    border: 0;
+}
+/*整体布局*/
+#carousel{
+    width: 680px;
+    height: 400px;
+    margin: 20px auto;
+    background-color: #333333;
+    position: relative;
+    overflow: hidden;
+}
+/*组图*/
+#carousel .imgs{
+    width: 99999px;/*要超过宽度*图像个数，方便扩展*/
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#carousel .imgs li{
+    float: left;
+}
+#carousel .imgs li img{
+    width: 680px;
+    height: 400px;
+}
+/*控制器*/
+#carousel .prev, #carousel .next{
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 180px;
+    z-index: 10;
+  
+}
+#carousel .prev{
+    background: url("./l.png") no-repeat;
+    left: 50px;
+}
+#carousel .next{
+    background: url("./r.png") no-repeat;
+    right: 50px;
+}
+/*计数器*/
+#carousel .count{
+    width: 680px;
+    height: 15px;
+    position: absolute;
+    bottom: 15px;
+    z-index: 10;
+}
+#carousel .count ul{
+    width: 120px;
+    margin: 0 auto;
+}
+#carousel .count ul li{
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #ffffff;
+    float: left;
+    overflow: hidden;
+    cursor: pointer;
+}
+#carousel .count .active{
+    background-color: #5f6bff;
+}

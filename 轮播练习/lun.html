@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      *{
+          padding: 0;
+          margin: 0;
+          list-style: none;
+      }
+      img {
+          border: 0;
+      }
+      #carousel {
+          height: 470px;
+          width: 980px;
+          margin: auto;
+          overflow: hidden;
+           position: relative;
+      }
+      .imgs {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 9999px;
+        
+      }
+      .imgs li {
+          float: left;
+           /* width: 980px;  */
+      }
+      .imgs li img {
+          width: 980px;
+          height: 470px;
+      }
+      .count {
+          width: 980px;
+          height: 15px;
+          position: absolute;
+          bottom: 30px;
+          z-index: 10;
+      }
+      .count ul {
+          width: 150px;
+           margin: auto;
+      }
+      .count ul li {
+          width: 15px;
+          height: 15px;
+          margin: 0 5px;
+          background-color: aqua;
+          border-radius: 50%;
+           -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          float: left;
+          overflow: hidden;
+      }
+      .count .active {
+          background-color: black;
+      }
+    </style>
+</head>
+<body>
+ <div id="carousel">
+     <ul class="imgs">
+         <li><img src="../科比/画板-1.png"></li>
+         <li><img src="../科比/画板-2.png"></li>
+         <li><img src="../科比/画板-3.png"></li>
+         <li><img src="../科比/画板-4.png"></li>
+     </ul>
+    <!-- 控制器 -->
+     <div class="prve"></div>
+     <div class="next"></div>
+    <!-- 计数器 -->
+    <div class="count">
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+ </div>
+</body>
+ <script>
+     // 封装函数
+     function $(className) {
+         return document.getElementsByClassName(className)
+     }
+     // 暂存函数
+     onload = function() {
+         var course = document.getElementById('course')
+         var imgs = $('imgs')[0];
+         var imgLis = imgs.getElementsByTagName('li');
+         var next = $('next')[0];
+         var count = $('count')[0];
+         var countLis = count.getElementsByTagName('li')
+        //   var imgW = imgLis[0].offsetWidth
+        //   console.log(imgW)
+         var now = 0;
+        //改变计数器当前形状
+        function tab() {
+            for( var i = 0; i < countLis.length; i++) {
+                 countLis[i].className = '' //清空当前name值
+            }
+            // 当前的li添加active属性
+            countLis[now].className = 'active';
+            
+            //轮播组图
+             move(imgs,-(now * imgsLis[0].offsetWidth));
+        }
+       // 单机计数器，显示对应图
+         for (var i = 0; i < countLis.length; i++) {
+              countLis[i] = i // li 添加index属性
+              countLis[i].onclick = function(){
+                  now++;
+                  if(now == countLis.length){
+                      now = 0 
+                  }
+                  tab();
+              }
+         }
+        
+     };
+ </script>
+</html>

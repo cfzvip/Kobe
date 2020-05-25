@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科比</title>
+     <link rel="stylesheet" href="./swiper.css">
+</head>
+<body>
+  <div id="carousel">
+    <!--1.轮播组图-->
+    <ul class="imgs">
+      <li><a href="#"><img src="./01.jpg" alt="banner" /></a></li>
+      <li><a href="#"><img src="./02.jpg" alt="banner" /></a></li>
+      <li><a href="#"><img src="./03.jpg" alt="banner" /></a></li>
+      <li><a href="#"><img src="./04.jpg" alt="banner" /></a></li>
+    </ul>
+    <!--2.控制器-->
+    <div class="prev"></div>
+    <div class="next"></div>
+    <!--3.计数器（小圆点、缩略图或数字等）-->
+    <div class="count">
+      <ul>
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</body>
+<script>
+ /*获取DOM封装*/
+  function $(className) {
+    return document.getElementsByClassName(className);
+  }
+  var timer = null;
+  onload = function () {
+    // 获取DOM暂存起来
+    var carousel = document.getElementById('carousel');
+    var imgs = $('imgs')[0];
+    var imgsLis = imgs.getElementsByTagName('li');
+    var prev = $('prev')[0];
+    var next = $('next')[0];
+    var count = $('count')[0];
+    var countLis = count.getElementsByTagName('li');
+
+    var now = 0; // 初始的计数器的li标签为第1个，下标为0
+
+    // 改变计数器当前li的外观
+    function tab() {
+      // 清空所有计数器li标签上所有的class
+      for (var i = 0; i < countLis.length; i++) {
+        // countLis[i].setAttribute('class','');
+        countLis[i].className = ''
+      }
+      // 当前的li的添加active类
+      countLis[now].className = 'active';
+
+      // 轮播组图
+      move(imgs, -(now * imgsLis[0].offsetWidth));
+    }
+    // 单击计数器，显示对应的图
+    for (var i = 0; i < countLis.length; i++) {
+      countLis[i] = i;// 给每一个li标签的dom对象加了一个index属性
+      countLis[i].onclick = function () {
+        now++;
+        if (now == countLis.length) {
+          now = 0;
+        }
+
+        tab();
+      }
+
+    }
+
+    // 切换到上一张图（向左翻页）
+    prev.onclick = function () {
+      now--;
+      if (now == -1) {
+        now = imgsLis.length - 1;
+      }
+      tab();
+    }
+    // 切换到下一张图（向右翻页）
+    next.onclick = function () {
+      now++;
+      if (now == imgsLis.length) {
+        now = 0;
+      }
+
+      tab();
+    }
+
+    // 自动轮播（实际上默认是向右翻页）
+    var timer = setInterval(next.onclick, 2000)
+
+    // 鼠标悬停将停止播放
+    carousel.onmouseover = function () {
+      clearInterval(timer);
+    }
+    // 鼠标移走后将继续轮播
+    carousel.onmouseout = function () {
+      timer = setInterval(next.onclick, 2000)
+    }
+  };
+
+  function move(imgs, distance) {
+    clearInterval(timer);
+    timer = setInterval(function () {
+      var left = imgs.offsetLeft;// 获取left偏移值
+      var speed = (distance - left) / 5; // 控制轮播速度
+      imgs.style.left = left + speed + 'px'
+    }, 30)// 这里的30是用来控制轮播速度
+  }
+</script>
+</html>
